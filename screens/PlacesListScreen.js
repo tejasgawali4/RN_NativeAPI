@@ -10,8 +10,6 @@ const PlacesListScreen = props => {
 
     const places = useSelector(state => state.places.places);
 
-    console.log(places.length);
-
     const dispatch = useDispatch();
 
     useEffect(() => {
