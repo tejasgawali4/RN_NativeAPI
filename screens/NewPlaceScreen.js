@@ -21,11 +21,17 @@ const NewPlaceScreen = props => {
     const dispatch = useDispatch();
 
     const titleChangeHandler = text => {
+        // you could add validati
         setTitleValue(text);
     };
 
+    const locationPickedHandler = useCallback(location => {
+        console.log("Location Picked.",location);
+        setSelectedLocation(location);
+    }, []);
+
     const savePlaceHandler = () => {
-        dispatch(placeActions.addPlace(titleValue,selectedImage));
+        dispatch(placeActions.addPlace(titleValue,selectedImage,selectedLocation));
         props.navigation.goBack();
     };
 
@@ -43,7 +49,9 @@ const NewPlaceScreen = props => {
                     value={titleValue}
                     />
                 <ImagePicker onImageTaken={imageTakenHandler}/>
-                <LocationPicker navigation={props.navigation}/>
+                <LocationPicker 
+                    navigation={props.navigation}
+                    onLocationPicked={locationPickedHandler}/>
                 <Button 
                     title='Save Place' 
                     color={Colors.primary} 
